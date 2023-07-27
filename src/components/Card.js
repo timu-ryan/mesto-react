@@ -1,21 +1,21 @@
 import React from "react";
 
-const Card = ({ imageSrc, header, likes, isUser, onCardClick}) => {
+const Card = ({ card, onCardClick}) => {
 
   function handleClick() {
-    onCardClick(imageSrc);
+    onCardClick(card);
   }  
 
   return (
     <article className="card">
-      <img src={imageSrc} className="card__image" onClick={handleClick}/>
+      <img src={card.link} alt={card.name} className="card__image" onClick={handleClick}/>
       <div className="card__description">
-        <h2 className="card__text">{header}</h2>
+        <h2 className="card__text">{card.name}</h2>
         <button type="button" className="card__like"></button>
-        <p className="card__like-number">{likes}</p>
+        <p className="card__like-number">{card.likes.length}</p>
       </div>
       <button 
-        style={isUser ? {} : {display: 'none'}} 
+        style={card.isUser ? {} : {display: 'none'}} 
         type="button" 
         aria-label="удалить" 
         className="card__delete"

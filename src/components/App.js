@@ -11,10 +11,10 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
 
-  const [selectedCard, setSelectedCard] = useState('')
+  const [selectedCard, setSelectedCard] = useState({})
 
-  const handleCardClick = (evt) => {
-    setSelectedCard(evt)
+  const handleCardClick = (card) => {
+    setSelectedCard(card)
   }
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -30,7 +30,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard('')
+    setSelectedCard({})
   }
 
   return (
@@ -44,7 +44,13 @@ function App() {
       />
       <Footer />
 
-      <PopupWithForm name="edit" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm 
+        name="edit" 
+        title="Редактировать профиль" 
+        buttonText="Сохранить"
+        isOpen={isEditProfilePopupOpen} 
+        onClose={closeAllPopups}
+      >
         <label className="popup__field">
           <input
             id="name-input"
@@ -73,7 +79,13 @@ function App() {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm name="new-item" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm 
+        name="new-item" 
+        title="Новое место" 
+        buttonText="Добавить"
+        isOpen={isAddPlacePopupOpen} 
+        onClose={closeAllPopups}
+      >
         <label className="popup__field">
           <input
             id="place-name-input"
@@ -100,7 +112,13 @@ function App() {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm 
+        name="avatar" 
+        title="Обновить аватар" 
+        buttonText="Сохранить"
+        isOpen={isEditAvatarPopupOpen} 
+        onClose={closeAllPopups}
+      >
         <label className="popup__field">
           <input
             id="profile-avatar-input"
@@ -117,7 +135,13 @@ function App() {
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       
 
-      <PopupWithForm name="delete-card" title="Вы уверены?" isOpen={false} onClose={closeAllPopups}></PopupWithForm >
+      <PopupWithForm 
+        name="delete-card" 
+        title="Вы уверены?" 
+        buttonText="Да"
+        isOpen={false} 
+        onClose={closeAllPopups}
+      ></PopupWithForm >
 
     </div>
   );

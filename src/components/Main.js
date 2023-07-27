@@ -48,10 +48,7 @@ const Main = ({
         {cards.map(card => 
           <Card 
             key={card._id}
-            imageSrc={card.link} 
-            header={card.name} 
-            likes={card.likes.length}
-            isUser={card.isUser}
+            card={card}
             onCardClick={onCardClick}
           />
         )}
