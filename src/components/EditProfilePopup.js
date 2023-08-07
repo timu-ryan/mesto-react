@@ -12,7 +12,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]); 
+  }, [currentUser, isOpen]); 
 
   function handleNameChange(e) {
     setName(e.target.value)
@@ -41,7 +41,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
           <label className="popup__field">
             <input
               id="name-input"
-              value={name}
+              value={name || ''}
               onChange={handleNameChange}
               type="text"
               name="name"
@@ -56,7 +56,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
           <label className="popup__field">
             <input
               id="description-input"
-              value={description}
+              value={description || ''}
               onChange={handleDescriptionChange}
               type="text"
               name="description"

@@ -49,6 +49,7 @@ function App() {
       .then(()=>{
         setCards(cards.filter((item) => item._id !== card._id))
       })
+      .catch((err) => console.log(`Error: ${err}`));
   }
 
   const handleEditAvatarClick = () => {
@@ -92,6 +93,7 @@ function App() {
         setCards([newCard, ...cards])
         closeAllPopups();
       })
+      .catch((err) => console.log(`Error: ${err}`));
   }
 
   return (
