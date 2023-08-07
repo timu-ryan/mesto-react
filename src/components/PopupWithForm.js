@@ -8,7 +8,13 @@ const PopupWithForm = (props) => {
     `}>
       <div className="popup__container">
         <h2 className="popup__header">{props.title}</h2>
-        <form action="" name={props.name} noValidate className="popup__form popup__form_object_delete-card">
+        <form 
+          action="" 
+          onSubmit={props.handleSubmit} 
+          name={props.name} 
+          noValidate 
+          className="popup__form popup__form_object_delete-card"
+        >
           {props.children}
           <button type="submit" className="popup__button popup__button_delete-card">{props.buttonText}</button>
         </form>

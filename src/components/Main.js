@@ -1,45 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import api from '../utils/api';
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Main = ({
     onEditProfile,
     onAddPlace,
     onEditAvatar, 
-    onCardClick
+    onCardClick,
+    cards,
+    onCardLike,
+    onCardDelete,
   }) => {
-    
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
 
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getMyProfile(), api.getInitialCards()])
-      .then(([profile, initialCards]) => {
-        setUserAvatar(profile.avatar);
-        setUserName(profile.name);
-        setUserDescription(profile.about);
-        initialCards.forEach(card => card.isUser = profile._id === card.owner._id);
-        setCards([...initialCards]);
-      })
-      .catch((err) => console.log(`Error: ${err}`));
-  }, []);
-
-  
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content">
       <section className="profile">
-      <img src={userAvatar} alt="аватар" className="profile__avatar" />
+      <img src={currentUser.avatar} alt="аватар" className="profile__avatar" />
         <button type="button" className="profile__pen" onClick={onEditAvatar}></button>
         <div>
           <div className="profile__name">
-            <h1 className="profile__name-text">{userName}</h1>
+            <h1 className="profile__name-text">{currentUser.name}</h1>
             <button type="button" className="profile__edit" onClick={onEditProfile}></button>
           </div>
-          <p className="profile__description">{userDescription}</p>
+          <p className="profile__description">{currentUser.about}</p>
         </div>
         <button type="button" className="profile__button" onClick={onAddPlace}></button>
       </section>
@@ -50,6 +36,8 @@ const Main = ({
             key={card._id}
             card={card}
             onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
           />
         )}
       </section>

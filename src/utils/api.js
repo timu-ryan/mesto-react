@@ -19,15 +19,15 @@ class Api {
       .then(res => this._getResponseData(res));
   }
 
-  getMyProfile() {
+  getUserInfo() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: this._headers,
     })
     .then(res => this._getResponseData(res));
   }
-
-  editMyProfile(newName, newDescription) {
+  //editMyProfile
+  setUserInfo(newName, newDescription) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -63,6 +63,14 @@ class Api {
   removeLikeCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(res => this._getResponseData(res));
+  }
+
+  changeLikeCardStatus(cardId, like) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: like ? 'PUT' : 'DELETE',
       headers: this._headers,
     })
       .then(res => this._getResponseData(res));
